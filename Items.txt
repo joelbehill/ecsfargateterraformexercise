@@ -1,0 +1,8 @@
+AWS ECS / Auto scaling / ELB
+VPC flow logs / span monitoring
+RDS / Postgres
+S3 (for Terragrunt)
+Dynamo (for Terragrunt)
+CloudWatch monitoring (for CPU / Memory / Disk IO / AutoScaling alarms?)
+AWS Repository
+Github action triggers
