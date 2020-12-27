@@ -1,0 +1,9 @@
+# README
+
+## Table of Contents
+
+- [Infrastructure] (#infrastructure)
+
+## Infrastructure
+
+We are using ECS / EC2 to keep costs low and to maintain an older version of Ruby on Rails.  We are using ELB, auto scaling, and monitoring.  We also have a pipeline that triggers once a git merge is detected to make sure developers can easily simply update the Ruby on Rails container.  We are using the AWS Docker Repository.
