@@ -1,0 +1,13 @@
+bin
+app/tmp
+.*.swp
+a.out
+*.orig
+build_src
+.idea
+.DS_Store
+bundles/
+.hg/
+.git/
+app/test
+app/bin
