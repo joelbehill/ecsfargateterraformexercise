@@ -1,0 +1,2 @@
+Create bucket for terragrunt
+aws s3 mb s3://joelcc

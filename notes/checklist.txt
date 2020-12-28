@@ -37,3 +37,4 @@ Shore up IAM permissions and users
 Link to awsp
 AWS Organization?  Maybe?
 Overall calculate long term / per month estimates
+Track steps to get up and running on a Mac
