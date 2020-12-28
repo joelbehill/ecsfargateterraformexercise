@@ -1,8 +1,29 @@
+Docker
+- Dockerfile X
+- Docker compose X
+
+AWS
+IAM (login user)
+- User with MFA
+VPC / Subnets / NAT
+- VPC
+- Subnet
+- NAT
+AWS Repository
+- REPO
 AWS ECS / Auto scaling / ELB
+- ECS
+- Auto Scaling
+- ELB
 VPC flow logs / span monitoring
+- Flow logs
+- Span monitoring
 RDS / Postgres
+- RDS cheapest option
 S3 (for Terragrunt)
 Dynamo (for Terragrunt)
-CloudWatch monitoring (for CPU / Memory / Disk IO / AutoScaling alarms?)
-AWS Repository
+CloudWatch monitoring (for CPU / Memory / Disk IO / AutoScaling)
+- AutoScaling
 Github action triggers
+- On push to RoR repo docker image creation and upload to AWS Repo
+AWS Budget actions (CLI only)
