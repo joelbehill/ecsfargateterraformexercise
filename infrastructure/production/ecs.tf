@@ -64,6 +64,11 @@ resource "aws_ecs_service" "main_service" {
 
   network_configuration {
     subnets          = [aws_default_subnet.default_subnet_a.id, aws_default_subnet.default_subnet_b.id, aws_default_subnet.default_subnet_c.id]
-    assign_public_ip = true # Providing our containers with public IPs
+    assign_public_ip = true                                                # Providing our containers with public IPs
+    security_groups  = [aws_security_group.service_security_group.id] # Setting the security group
   }
+
+  depends_on = [
+    aws_default_subnet.default_subnet_a, aws_default_subnet.default_subnet_b, aws_default_subnet.default_subnet_c, aws_lb_target_group.target_group, aws_ecs_task_definition.main_task, aws_security_group.service_security_group
+  ]
 }
