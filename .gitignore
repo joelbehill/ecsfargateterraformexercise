@@ -14,3 +14,4 @@ app/bin
 **/.terraform*
 **/.terraform/
 terraform.tfstate*
+node_modules
