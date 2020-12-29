@@ -6,7 +6,8 @@ variable "ecr" {
 variable "default_tags" {
   type = map(string)
   default = {
-    team: "The Awesome IT Team"
-    env: "production"
+    Team: "The Awesome IT Team"
+    Environment: "Production"
+    ManagedBy: "Terraform"
   }
 }
