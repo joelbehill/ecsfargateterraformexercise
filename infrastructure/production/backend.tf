@@ -1,0 +1,22 @@
+data "aws_caller_identity" "current" {}
+
+provider "aws" {
+  region                  = "us-east-2"
+}
+
+/*# Backend must remain commented until the Bucket
+ and the DynamoDB table are created.
+ After the creation you can uncomment it,
+ run "terraform init" and then "terraform apply" */
+
+# Backend cannot have any variables so unfortunately we are stuck selecting a unique bucket name
+/*
+terraform {
+  backend "s3" {
+    bucket         = "hill-cc-terraform-state"
+    key            = "terraform.tfstate"
+    region         = "us-east-2"
+    dynamodb_table = "joelhill-terraform-state"
+  }
+}
+*/

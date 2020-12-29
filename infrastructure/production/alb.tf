@@ -1,13 +1,11 @@
 resource "aws_alb" "application_load_balancer" {
   name               = "main-lb" # Naming our load balancer
   load_balancer_type = "application"
-  subnets = [ # Referencing the default subnets
-    aws_default_subnet.default_subnet_a.id,
-    aws_default_subnet.default_subnet_b.id,
-    aws_default_subnet.default_subnet_c.id
-  ]
+  subnets = module.vpc.public_subnets
   # Referencing the security group
   security_groups = [aws_security_group.load_balancer_security_group.id]
+
+  tags = var.default_tags
 }
 
 resource "aws_lb_target_group" "target_group" {
@@ -15,15 +13,13 @@ resource "aws_lb_target_group" "target_group" {
   port        = 80
   protocol    = "HTTP"
   target_type = "ip"
-  vpc_id      = aws_default_vpc.default_vpc.id # Referencing the default VPC
+  vpc_id      = module.vpc.vpc_id
   health_check {
     matcher = "200,301,302"
     path = "/"
   }
 
-  depends_on = [
-    aws_default_vpc.default_vpc
-  ]
+  tags = var.default_tags
 }
 
 resource "aws_lb_listener" "listener" {
