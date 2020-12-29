@@ -9,11 +9,9 @@
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches: [ infra ]
 
-name: Node Project `my-app` CI on ECR
+name: Build docker container and push to AWS ECR repo
 
 jobs:
   deploy:
