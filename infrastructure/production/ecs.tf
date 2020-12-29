@@ -8,7 +8,7 @@ resource "aws_ecs_task_definition" "main_task" {
   [
     {
       "name": "main-task",
-      "image": "730061254062.dkr.ecr.us-east-2.amazonaws.com/express:latest",
+      "image": "${var.ecr}",
       "essential": true,
       "portMappings": [
         {
