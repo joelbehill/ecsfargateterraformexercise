@@ -11,3 +11,6 @@ bundles/
 .git/
 app/test
 app/bin
+**/.terraform*
+**/.terraform/
+terraform.tfstate*
