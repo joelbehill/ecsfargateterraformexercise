@@ -26,6 +26,10 @@ resource "aws_ecs_task_definition" "main_task" {
   memory                   = 512         # Specifying the memory our container requires
   cpu                      = 256         # Specifying the CPU our container requires
   execution_role_arn       = aws_iam_role.ecsTaskExecutionRole.arn
+
+  depends_on = [
+    aws_iam_role.ecsTaskExecutionRole
+  ]
 }
 
 resource "aws_iam_role" "ecsTaskExecutionRole" {
@@ -69,6 +73,6 @@ resource "aws_ecs_service" "main_service" {
   }
 
   depends_on = [
-    aws_default_subnet.default_subnet_a, aws_default_subnet.default_subnet_b, aws_default_subnet.default_subnet_c, aws_lb_target_group.target_group, aws_ecs_task_definition.main_task, aws_security_group.service_security_group
+    aws_default_subnet.default_subnet_a, aws_default_subnet.default_subnet_b, aws_default_subnet.default_subnet_c, aws_lb_target_group.target_group, aws_ecs_task_definition.main_task, aws_security_group.service_security_group, aws_ecs_cluster.casechek_cluster
   ]
 }

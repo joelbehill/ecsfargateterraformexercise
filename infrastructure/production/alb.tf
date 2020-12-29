@@ -20,6 +20,10 @@ resource "aws_lb_target_group" "target_group" {
     matcher = "200,301,302"
     path = "/"
   }
+
+  depends_on = [
+    aws_default_vpc.default_vpc
+  ]
 }
 
 resource "aws_lb_listener" "listener" {
@@ -30,4 +34,8 @@ resource "aws_lb_listener" "listener" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.target_group.arn # Referencing our tagrte group
   }
+
+  depends_on = [
+    aws_lb_target_group.target_group, aws_alb.application_load_balancer
+  ]
 }
