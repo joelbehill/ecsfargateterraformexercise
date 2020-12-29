@@ -10,13 +10,11 @@ provider "aws" {
  run "terraform init" and then "terraform apply" */
 
 # Backend cannot have any variables so unfortunately we are stuck selecting a unique bucket name
-/*
 terraform {
   backend "s3" {
     bucket         = "hill-cc-terraform-state"
     key            = "terraform.tfstate"
     region         = "us-east-2"
-    dynamodb_table = "joelhill-terraform-state"
+    dynamodb_table = "hill-cc-terraform-state"
   }
 }
-*/

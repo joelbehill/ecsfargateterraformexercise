@@ -1,7 +1,7 @@
 # I don't feel comfortable adding this dynamodb which contains the terraform lock to terraform...
 # in case I make a mistake.
 resource "aws_s3_bucket" "terraform_lock" {
-  bucket = "joelhill-terraform-state"
+  bucket = "hill-cc-terraform-state"
   versioning {
       enabled = true
   }
