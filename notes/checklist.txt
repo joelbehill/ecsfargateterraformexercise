@@ -30,7 +30,7 @@ AWS Budget actions (CLI only)
 Nice to haves
 Script to add a Terraform default user
 Script to disable Endpoints
-Script to remove default security groups from all regions except used (see https://console.aws.amazon.com/iam/home?region=us-east-2#/account_settings)
+Script to remove entries from all default security groups from all regions except used (see https://console.aws.amazon.com/iam/home?region=us-east-2#/account_settings)
 Shore up IAM permissions and users
 Link to awsp
 AWS Organization?  Maybe?
