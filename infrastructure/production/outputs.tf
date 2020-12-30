@@ -5,7 +5,3 @@ output "alb_url" {
 output "joelsecret" {
   value = aws_iam_access_key.joelkey.encrypted_secret
 }
-
-output "terraformsecret" {
-  value = aws_iam_access_key.terraformkey.encrypted_secret
-}

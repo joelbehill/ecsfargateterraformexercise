@@ -11,3 +11,8 @@ variable "default_tags" {
     ManagedBy: "Terraform"
   }
 }
+
+variable "allowed_ips" {
+  default = ["0.0.0.0/0"]
+  type = list
+}

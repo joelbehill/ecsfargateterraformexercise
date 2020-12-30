@@ -4,18 +4,8 @@ resource "aws_iam_user" "joel" {
   force_destroy = true
 }
 
-resource "aws_iam_user" "terraform" {
-  name          = "terraform"
-  path          = "/"
-  force_destroy = true
-}
-
 resource "aws_iam_access_key" "joelkey" {
   user    = aws_iam_user.joel.name
-}
-
-resource "aws_iam_access_key" "terraformkey" {
-  user    = aws_iam_user.terraform.name
 }
 
 resource "aws_iam_user_ssh_key" "user" {
@@ -33,8 +23,7 @@ resource "aws_iam_group_membership" "administrators" {
   name = "administrators-membership"
 
   users = [
-    aws_iam_user.joel.name,
-    aws_iam_user.terraform.name
+    aws_iam_user.joel.name
   ]
 
   group = aws_iam_group.administrators.name

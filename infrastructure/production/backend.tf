@@ -9,7 +9,6 @@ provider "aws" {
  After the creation you can uncomment it,
  run "terraform init" and then "terraform apply" */
 
-# Backend cannot have any variables so unfortunately we are stuck selecting a unique bucket name
 terraform {
   backend "s3" {
     bucket         = "hill-cc-terraform-state"

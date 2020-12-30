@@ -5,7 +5,11 @@
 We are using ECS / Fargate and Express (NodeJS).  We are using the AWS Docker Repository to store the image.
 ## Installation
 
-Use docker and terraform to build the initial image to test and deploy.
+Use docker and terraform to build the initial image to test and deploy.  First you need to go into the **infrastructure/backend** folder and run terraform to create resources in dynamodb, s3, and ecr.  This will allow us to create a bucket and dynamo table.  It will also allow us to create an ECR registry.  From there we can upload the image using **app/express/loginBuildPushDocker.sh**.  From there we can go into the folder **infrastructure/production** and run a terraform plan.
+
+## URL
+
+http://main-lb-285429453.us-east-2.elb.amazonaws.com/
 
 ### Download Docker
 
@@ -73,13 +77,19 @@ chmod +x loginBuildPushDocker.sh
 
 ## Usage
 
+Go into the **infrastructure/backend** folder and run the following
+
 ```
+terraform init
 terraform plan
 terraform apply
 ```
 
-Once you run the intial ```terraform apply``` you can uncomment out the backend.tf stanza
+This will create the DynamoDB table and s3 bucket.  Please be aware that you must use a unique s3 bucket name and the one listed will not work.
 
+Once you are done go into the **infrastructure/production** folder.  Make sure that the **backend.tf** file has both the bucket and dynamo_table as the one you specified in the files **infrastructure/backend/s3.tf** and **infrastructure/dynamodb.tf**
+
+**backend.tf**
 ```
 terraform {
   backend "s3" {
@@ -91,6 +101,13 @@ terraform {
 }
 ```
 
+```
+terraform plan
+terraform apply
+```
+
+Once you run the intial ```terraform apply``` you can uncomment out the backend.tf stanza
+
 ## Notes
 
 On a push to the branch app a new docker container will be created and be uploaded to the ECR repo.
@@ -101,18 +118,23 @@ I initially chose to use Ruby on Rails, but after trying out what is the best an
 
 I choose Terraform (raw) because it was easy to install and, if I need to go back to the infrastructure later on it is easier to understand it.  Everyone's needs are different and CDK definitely has some wonderful features, and I am interested in learning it more.
 
-## What's Next
+## Future Ideas
 
-Here are some things that may be necessary going forward
+Here are some things that may be useful in the future
 
-- Script to add a Terraform default user
-- Script to disable Endpoints (see https://console.aws.amazon.com/iam/home?region=us-east-2#/account_settings)
 - Script to remove entries from all default security groups from all regions except used
-- Shore up IAM permissions and users
 - AWS Organization?  Maybe?
 - Overall calculate long term / per month estimates
-- RDS
+- RDS integration
+- CloudFront
+- Limit services using Service Policies
+- Domain Name purchase via Route 53
+- Blue / green deployment instead of changing cluster image
+- Separating into modules via git
 
+## Monitoring Traffic
+
+There are a few ways to monitor traffic.  VPC Flow Logs are an option but there is also the virtual traffic mirroring to see the actual data and attach an IDS to it.  They are not created in this repository, for monetary reasons, but remanents exist.  There is of course CloudWatch logs as well.
 ## Disclaimer
 
 This is not meant for PHI information.  In order to get this ready making sure that there is an SSL endpoint for the task.  Also, make sure that there is an SSL termination on the ALB

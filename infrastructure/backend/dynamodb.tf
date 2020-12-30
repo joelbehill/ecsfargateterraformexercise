@@ -10,12 +10,9 @@ resource "aws_dynamodb_table" "terraform_lock" {
       type = "S"
   }
 
-  tags = merge(
-    var.default_tags,
-    {
-      Name = "DynamoDB Terraform State Lock Table"
-    },
-  )
+  tags = {
+    Name = "DynamoDB Terraform State Lock Table"
+  }
 
   lifecycle {
     ignore_changes = [
