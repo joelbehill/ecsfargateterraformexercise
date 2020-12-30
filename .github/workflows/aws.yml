@@ -9,7 +9,7 @@
 
 on:
   push:
-    branches: [ infra ]
+    branches: [ app ]
 
 name: Build docker container and push to AWS ECR repo
 

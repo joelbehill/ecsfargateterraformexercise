@@ -20,8 +20,6 @@ AWS ECS / Auto scaling / ELB
 VPC flow logs / span monitoring
 - Flow logs
 - Span monitoring (What is the cost?)
-RDS / Postgres
-- RDS cheapest option
 CloudWatch monitoring (for CPU / Memory / Disk IO / AutoScaling)
 - AutoScaling
 Github action triggers
@@ -38,3 +36,4 @@ Link to awsp
 AWS Organization?  Maybe?
 Overall calculate long term / per month estimates
 Track steps to get up and running on a Mac
+RDS
