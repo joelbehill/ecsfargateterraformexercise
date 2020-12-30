@@ -21,6 +21,11 @@ Load your AWS profile and run the following command to create an ECR repository
 
 ```
 aws ecr create-repository --repository-name test
+```
+
+You will get an output like the one below.
+
+```
 {
     "repository": {
         "repositoryArn": "arn:aws:ecr:us-east-2:aaaaaaaaaaaa:repository/test",
@@ -59,7 +64,7 @@ Repository Name
 test
 ```
 
-After you install docker go to ```app/express```
+After you install docker go to ```app/express```.  When you run the script it will ask you for the above information.
 
 ```
 chmod +x loginBuildPushDocker.sh
