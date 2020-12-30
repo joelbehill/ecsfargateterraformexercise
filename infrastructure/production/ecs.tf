@@ -86,6 +86,10 @@ resource "aws_ecs_service" "main_service" {
     security_groups  = [aws_security_group.service_security_group.id] # Setting the security group
   }
 
+  lifecycle {
+    ignore_changes = [desired_count]
+  }
+
   tags = merge(
     var.default_tags,
     {

@@ -7,7 +7,7 @@ We are using ECS / Fargate and Express (NodeJS).  We are using the AWS Docker Re
 
 Use docker and terraform to build the initial image to test and deploy.  First you need to go into the **infrastructure/backend** folder and run terraform to create resources in dynamodb, s3, and ecr.  This will allow us to create a bucket and dynamo table.  It will also allow us to create an ECR registry.  From there we can upload the image using **app/express/loginBuildPushDocker.sh**.  From there we can go into the folder **infrastructure/production** and run a terraform plan.
 
-## URL
+### URL
 
 http://main-lb-285429453.us-east-2.elb.amazonaws.com/
 
@@ -21,60 +21,6 @@ https://www.docker.com/products/docker-desktop
 brew install terraform
 ```
 
-Load your AWS profile and run the following command to create an ECR repository
-
-```
-aws ecr create-repository --repository-name test
-```
-
-You will get an output like the one below.
-
-```
-{
-    "repository": {
-        "repositoryArn": "arn:aws:ecr:us-east-2:aaaaaaaaaaaa:repository/test",
-        "registryId": "aaaaaaaaaaaa",
-        "repositoryName": "test",
-        "repositoryUri": "aaaaaaaaaaaa.dkr.ecr.us-east-2.amazonaws.com/test",
-        "createdAt": "2020-12-29T19:57:12-06:00",
-        "imageTagMutability": "MUTABLE",
-        "imageScanningConfiguration": {
-            "scanOnPush": false
-        },
-        "encryptionConfiguration": {
-            "encryptionType": "AES256"
-        }
-    }
-}
-```
-
-Take this part of the URL and add it to the file **loginBuildPushDocker.sh**
-
-
-ECR
-
-```
-aaaaaaaaaaaa.dkr.ecr.us-east-2.amazonaws.com
-```
-
-URI
-```
-aaaaaaaaaaaa.dkr.ecr.us-east-2.amazonaws.com/test
-```
-
-Repository Name
-
-```
-test
-```
-
-After you install docker go to ```app/express```.  When you run the script it will ask you for the above information.
-
-```
-chmod +x loginBuildPushDocker.sh
-./loginBuildPushDocker.sh
-```
-
 ## Usage
 
 Go into the **infrastructure/backend** folder and run the following
@@ -85,7 +31,7 @@ terraform plan
 terraform apply
 ```
 
-This will create the DynamoDB table and s3 bucket.  Please be aware that you must use a unique s3 bucket name and the one listed will not work.
+This will create the DynamoDB table, S3 bucket, and ECR Repository.  Please be aware that you must use a unique s3 bucket name and the one listed will not work.
 
 Once you are done go into the **infrastructure/production** folder.  Make sure that the **backend.tf** file has both the bucket and dynamo_table as the one you specified in the files **infrastructure/backend/s3.tf** and **infrastructure/dynamodb.tf**
 
@@ -101,12 +47,21 @@ terraform {
 }
 ```
 
+Go to **app/express/** and run the following
+
+```
+chmod +x loginBuildPushDocker.sh
+./loginBuildPushDocker.sh
+```
+
+This will prompt you to set your region.  In this repo it is **us-east-2** your generated registry and repository.  This information you can retrieve when you run the backend terraform.
+
+Once that is complete and you receive a success message you can then go into the **infrastructure/production** folder and run the following.
+
 ```
 terraform plan
 terraform apply
 ```
-
-Once you run the intial ```terraform apply``` you can uncomment out the backend.tf stanza
 
 ## Notes
 
@@ -135,6 +90,8 @@ Here are some things that may be useful in the future
 ## Monitoring Traffic
 
 There are a few ways to monitor traffic.  VPC Flow Logs are an option but there is also the virtual traffic mirroring to see the actual data and attach an IDS to it.  They are not created in this repository, for monetary reasons, but remanents exist.  There is of course CloudWatch logs as well.
+
+However, I would really just like an external ping / web test using a monitor like New Relic or something like that where I can be sured that my users can see this page.  I think in this demo it is too much because it is not meant to be production but it would give me peace of mind.
 ## Disclaimer
 
 This is not meant for PHI information.  In order to get this ready making sure that there is an SSL endpoint for the task.  Also, make sure that there is an SSL termination on the ALB

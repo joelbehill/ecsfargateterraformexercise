@@ -1,5 +1,5 @@
 resource "aws_budgets_budget" "ec2" {
-  name              = "budget-ec2-monthly"
+  name              = "Monthly EC2 Budget"
   budget_type       = "COST"
   limit_amount      = "10"
   limit_unit        = "USD"
