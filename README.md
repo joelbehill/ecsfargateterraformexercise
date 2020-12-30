@@ -2,7 +2,7 @@
 
 ## Infrastructure
 
-We are using ECS / Fargate and Express.  We are using the AWS Docker Repository to store the image.
+We are using ECS / Fargate and Express (NodeJS).  We are using the AWS Docker Repository to store the image.
 ## Installation
 
 Use docker and terraform to build the initial image to test and deploy.
@@ -55,14 +55,17 @@ Here are some things that may be necessary going forward
 - Script to disable Endpoints (see https://console.aws.amazon.com/iam/home?region=us-east-2#/account_settings)
 - Script to remove entries from all default security groups from all regions except used
 - Shore up IAM permissions and users
-- Link to awsp
 - AWS Organization?  Maybe?
 - Overall calculate long term / per month estimates
-- Track steps to get up and running on a Mac
 - RDS
 
 ## Disclaimer
 
-This is not meant for PHI information.
+This is not meant for PHI information.  In order to get this ready making sure that there is an SSL endpoint for the task.  Also, make sure that there is an SSL termination on the ALB
+
+## Helpful Tools
+
+https://github.com/johnnyopao/awsp
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
