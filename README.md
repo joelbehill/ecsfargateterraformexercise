@@ -17,6 +17,55 @@ https://www.docker.com/products/docker-desktop
 brew install terraform
 ```
 
+Load your AWS profile and run the following command to create an ECR repository
+
+```
+aws ecr create-repository --repository-name test
+{
+    "repository": {
+        "repositoryArn": "arn:aws:ecr:us-east-2:aaaaaaaaaaaa:repository/test",
+        "registryId": "aaaaaaaaaaaa",
+        "repositoryName": "test",
+        "repositoryUri": "aaaaaaaaaaaa.dkr.ecr.us-east-2.amazonaws.com/test",
+        "createdAt": "2020-12-29T19:57:12-06:00",
+        "imageTagMutability": "MUTABLE",
+        "imageScanningConfiguration": {
+            "scanOnPush": false
+        },
+        "encryptionConfiguration": {
+            "encryptionType": "AES256"
+        }
+    }
+}
+```
+
+Take this part of the URL and add it to the file **loginBuildPushDocker.sh**
+
+
+ECR
+
+```
+aaaaaaaaaaaa.dkr.ecr.us-east-2.amazonaws.com
+```
+
+URI
+```
+aaaaaaaaaaaa.dkr.ecr.us-east-2.amazonaws.com/test
+```
+
+Repository Name
+
+```
+test
+```
+
+After you install docker go to ```app/express```
+
+```
+chmod +x loginBuildPushDocker.sh
+./loginBuildPushDocker.sh
+```
+
 ## Usage
 
 ```
