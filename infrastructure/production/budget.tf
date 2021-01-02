@@ -17,4 +17,8 @@ resource "aws_budgets_budget" "ec2" {
     notification_type          = "ACTUAL"
     subscriber_email_addresses = ["joelhill+awsbudget@gmail.com"]
   }
+
+  lifecycle {
+    ignore_changes = [limit_amount]
+  }
 }
