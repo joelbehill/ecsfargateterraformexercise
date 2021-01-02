@@ -11,7 +11,7 @@ module "vpc" {
   enable_nat_gateway  = false
   single_nat_gateway  = false
   reuse_nat_ips       = true                    # <= Skip creation of EIPs for the NAT Gateways
-  external_nat_ip_ids = aws_eip.nat.*.id   # <= IPs specified here as input to the module
+  #external_nat_ip_ids = aws_eip.nat.*.id   # <= IPs specified here as input to the module
 
   tags = {
     Terraform = "true"
@@ -19,11 +19,14 @@ module "vpc" {
   }
 }
 
+# Removing the NAT gateways and associated EIPs to save money
+/*
 resource "aws_eip" "nat" {
   count = 3
 
   vpc = true
 }
+*/
 
 # This is just an example of turning on AWS Flow logs to monitor traffic
 
