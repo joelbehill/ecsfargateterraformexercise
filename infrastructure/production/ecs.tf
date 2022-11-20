@@ -1,10 +1,10 @@
-resource "aws_ecs_cluster" "casechek_cluster" {
-  name = "casechek" # Naming the cluster
+resource "aws_ecs_cluster" "example_cluster" {
+  name = "example" # Naming the cluster
 
   tags = merge(
     var.default_tags,
     {
-      Name = "casechek-cluster"
+      Name = "example-cluster"
     },
   )
 }
@@ -69,7 +69,7 @@ resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy" {
 
 resource "aws_ecs_service" "main_service" {
   name            = "main-service"                             # Naming our first service
-  cluster         = aws_ecs_cluster.casechek_cluster.id             # Referencing our created Cluster
+  cluster         = aws_ecs_cluster.example_cluster.id             # Referencing our created Cluster
   task_definition = aws_ecs_task_definition.main_task.arn # Referencing the task our service will spin up
   launch_type     = "FARGATE"
   desired_count   = 3
@@ -98,6 +98,6 @@ resource "aws_ecs_service" "main_service" {
   )
 
   depends_on = [
-    module.vpc.private_subnets, aws_lb_target_group.target_group, aws_ecs_task_definition.main_task, aws_security_group.service_security_group, aws_ecs_cluster.casechek_cluster
+    module.vpc.private_subnets, aws_lb_target_group.target_group, aws_ecs_task_definition.main_task, aws_security_group.service_security_group, aws_ecs_cluster.example_cluster
   ]
 }
